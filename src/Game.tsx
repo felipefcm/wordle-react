@@ -1,12 +1,23 @@
-
 import React, { FC } from 'react'
 
-import './Game.css'
+import { Box, Center, Flex, useTheme } from '@chakra-ui/react'
 
-const App: FC = () => {
+import MainBoard from './components/MainBoard'
+
+const Game: FC = () => {
+  const { colors } = useTheme()
+
   return (
-    <h1>Wordle Game</h1>
+    <Flex direction="column">
+      <Center h="10" bg={colors.brand.titleBarBg} color={colors.brand.titleBarText}>
+        Wordle Game
+      </Center>
+
+      <Box>
+        <MainBoard wordLength={4} numAttempts={5} />
+      </Box>
+    </Flex>
   )
 }
 
-export default App
+export default Game

@@ -1,21 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Box, HStack, useTheme, VStack } from '@chakra-ui/react'
-import LetterCell, { State } from './LetterCell'
+import { Box, VStack } from '@chakra-ui/react'
 import WordAttempt from './WordAttempt'
 
 type Props = {
-	wordLength: number
+	word: string
 	numAttempts: number
 }
 
 const MainBoard: React.FC<Props> = (props) => {
-	return (
-    <Box>
+
+  const [current, setCurrent] = useState(0)
+  const [attempts, setAttempts] = useState<string[]>(['house', 'black', 'latpp', 'apple'])
+
+  const renderAttemps = () => {
+    return (
       <VStack spacing="2px" pt={2} pb={2}>
-        <WordAttempt />
-        <WordAttempt />
+        {
+          [...Array(props.numAttempts)].map((_, i) => (
+            <WordAttempt
+              key={i}
+              word={props.word}
+              attempt={attempts[i] || ''}
+              isCurrent={i === current}
+            />
+          ))
+        }
       </VStack>
+    )
+  }
+
+	return (
+    <Box onClick={() => setCurrent(current+1)}>
+      {renderAttemps()}
     </Box>
   )
 }

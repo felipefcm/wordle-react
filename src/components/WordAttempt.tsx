@@ -2,18 +2,31 @@ import React from 'react'
 
 import { HStack } from '@chakra-ui/react'
 
-import LetterCell, { State } from './LetterCell'
+import LetterCell from './LetterCell'
+import { determineLetterState, State } from '../lib/wordle'
 
 type Props = {
+  isCurrent: boolean
+  word: string
+  attempt: string
 }
 
 const WordAttempt: React.FC<Props> = (props) => {
+
+  const renderLetters = () => {
+    return [...Array(props.word.length)].map((_, i) => (
+      <LetterCell 
+        key={i}
+        letter={props.attempt[i] || ''}
+        state={determineLetterState(props.word, props.attempt, i)}
+      />
+    ))
+  }
+
   return (
     <>
       <HStack spacing="2px">
-        <LetterCell letter='S' state={State.NOT_PRESENT} />
-        <LetterCell letter='T' state={State.INCORRECT_POSITION} />
-        <LetterCell letter='U' state={State.CORRECT} />
+        {renderLetters()}
       </HStack>
     </>
   )

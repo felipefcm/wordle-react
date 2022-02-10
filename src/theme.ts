@@ -11,7 +11,7 @@ const theme = {
       letterNotInWordBg: 'gray.700',
       letterNotInWordText: 'gray.300',
       letterIncorrectPosBg: 'orange.500',
-      letterIncorrectPosText: 'gray.700',
+      letterIncorrectPosText: 'gray.300',
       letterCorrectBg: 'green.500',
       letterCorrectText: 'gray.300',
     }

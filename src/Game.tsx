@@ -27,9 +27,9 @@ const Game: FC = () => {
         <MainBoard word={randomWord} numAttempts={5} />
       </Box>
 
-      {/* <Box>
+      <Box>
         <VirtualKeyboard word={randomWord} />
-      </Box> */}
+      </Box>
     </Flex>
   )
 }

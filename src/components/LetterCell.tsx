@@ -10,14 +10,14 @@ type Props = {
 
 const LetterCell: React.FC<Props> = (props) => {
   const { colors } = useTheme()
-  
+
   const [bgColor, textColor] = determineColors(props.state, colors)
 
-	return (
+  return (
     <Center
       width={10}
       height={10}
-      rounded={6}
+      rounded={4}
       fontSize={30}
       bg={bgColor}
       color={textColor}

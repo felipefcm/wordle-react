@@ -4,8 +4,8 @@ import { Box, VStack } from '@chakra-ui/react'
 import WordAttempt from './WordAttempt'
 
 type Props = {
-	word: string
-	numAttempts: number
+  word: string
+  numAttempts: number
 }
 
 const MainBoard: React.FC<Props> = (props) => {
@@ -30,8 +30,8 @@ const MainBoard: React.FC<Props> = (props) => {
     )
   }
 
-	return (
-    <Box onClick={() => setCurrent(current+1)}>
+  return (
+    <Box mt={10} onClick={() => setCurrent(current + 1)}>
       {renderAttemps()}
     </Box>
   )

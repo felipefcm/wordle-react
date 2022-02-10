@@ -14,6 +14,11 @@ const theme = {
       letterIncorrectPosText: 'gray.300',
       letterCorrectBg: 'green.500',
       letterCorrectText: 'gray.300',
+
+      backspaceBg: 'red.500',
+      backspaceText: 'gray.300',
+      enterBg: 'green.500',
+      enterText: 'gray.300',
     }
 	},
 	styles: {

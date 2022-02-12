@@ -11,7 +11,7 @@ type Props = {
 const MainBoard: React.FC<Props> = (props) => {
 
   const [current, setCurrent] = useState(0)
-  const [attempts, setAttempts] = useState<string[]>(['house', 'black', 'latpp', 'apple'])
+  const [attempts, setAttempts] = useState<string[]>([])
 
   const renderAttemps = () => {
     return (
@@ -31,7 +31,7 @@ const MainBoard: React.FC<Props> = (props) => {
   }
 
   return (
-    <Box mt={10} onClick={() => setCurrent(current + 1)}>
+    <Box mt={10}>
       {renderAttemps()}
     </Box>
   )

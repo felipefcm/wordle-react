@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import theme from './theme'
-import Game from './Game'
+import Game from './lib/Game'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,5 +14,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// reportWebVitals(console.log)

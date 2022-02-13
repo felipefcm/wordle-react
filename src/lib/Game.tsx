@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 
 import { Box, Center, Flex, useTheme } from '@chakra-ui/react'
 
 import MainBoard from '../components/MainBoard'
 import VirtualKeyboard from '../components/VirtualKeyboard'
 import { GameContext, GameContextType } from './GameContext'
-import { EventBus } from './EventBus'
+import { EventBus, EventType } from './EventBus'
 
 const gameContext: GameContextType = {
   eventBus: new EventBus(),
@@ -19,26 +19,36 @@ const words = [
 ]
 
 const Game: FC = () => {
-  const { colors } = useTheme()
 
   const randomWord = words[Math.trunc(Math.random() * words.length)]
+
+  useEffect(() => {
+    const id = gameContext.eventBus.subscribe(EventType.ATTEMPT, (attempt: string) => {
+    })
+
+    return () => {
+      gameContext.eventBus.unsubscribe(EventType.ATTEMPT, id)
+    }
+  })
 
   return (
     <GameContext.Provider value={gameContext}>
       <Flex direction="column">
-        <Center h="10" bg={colors.brand.titleBarBg} color={colors.brand.titleBarText}>
-          Wordle Game
-        </Center>
-
-        <Box>
-          <MainBoard word={randomWord} numAttempts={5} />
-        </Box>
-
-        <Box>
-          <VirtualKeyboard word={randomWord} />
-        </Box>
+        <TitleBar />
+        <MainBoard word={randomWord} numAttempts={5} />
+        <VirtualKeyboard word={randomWord} />
       </Flex>
     </GameContext.Provider>
+  )
+}
+
+const TitleBar = () => {
+  const { colors } = useTheme()
+
+  return (
+    <Center h="10" bg={colors.brand.titleBarBg} color={colors.brand.titleBarText}>
+      Wordle Game
+    </Center>
   )
 }
 

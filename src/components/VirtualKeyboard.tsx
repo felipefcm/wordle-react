@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 
-import { Center, HStack, useTheme, VStack } from '@chakra-ui/react'
+import { Center, Flex, HStack, useTheme, VStack } from '@chakra-ui/react'
 import { BsBackspace } from 'react-icons/bs'
 import { determineLetterState } from '../lib/wordle'
 import { GameContext } from '../lib/GameContext'
+import { EventType } from '../lib/EventBus'
 
 type Props = {
   word: string
@@ -20,23 +21,25 @@ const VirtualKeyboard: React.FC<Props> = (props) => {
   const gameContext = useContext(GameContext)
 
   const onKeyPress = (letter: string) => {
-    if (gameContext)
-      gameContext.eventBus.publish('keypress', letter)
+    if (gameContext) {
+      gameContext.eventBus.publish(EventType.KEYPRESS, letter)
+    }
   }
 
   const renderRow = (row: string) => {
     return (
-      <HStack>
+      <HStack spacing={1}>
         {
           row.split('').map((letter, i) => (
             <Center
+              as={'button'}
               key={i}
               color={"gray.200"}
               bg={"blue.300"}
               cursor={'default'}
               width={10}
               height={10}
-              rounded={4}
+              rounded={1}
               onClick={() => onKeyPress(letter.toUpperCase())}
             >
               {letter.toUpperCase()}
@@ -47,50 +50,55 @@ const VirtualKeyboard: React.FC<Props> = (props) => {
     )
   }
 
+  const Backspace = () => {
+    const { colors } = useTheme()
+    return (
+      <Center
+        as={'button'}
+        bg={colors.brand.backspaceBg}
+        color={colors.brand.backspaceText}
+        width={10}
+        height={10}
+        rounded={1}
+        onClick={() => onKeyPress('BACKSPACE')}
+      >
+        <BsBackspace />
+      </Center>
+    )
+  }
+
+  const Enter = () => {
+    const { colors } = useTheme()
+    return (
+      <Center
+        as={'button'}
+        cursor={'default'}
+        bg={colors.brand.enterBg}
+        color={colors.brand.enterText}
+        width={20}
+        height={10}
+        rounded={1}
+        onClick={() => onKeyPress('ENTER')}
+      >
+        {'ENTER'}
+      </Center>
+    )
+  }
+
   return (
-    <VStack mt={10}>
+    <Flex justifyContent="center">
+      <VStack mt={10} spacing={1}>
 
-      {renderRow(rows[0])}
-      {renderRow(rows[1])}
-      {renderRow(rows[2])}
+        {renderRow(rows[0])}
+        {renderRow(rows[1])}
+        {renderRow(rows[2])}
 
-      <HStack>
-        <Backspace />
-        <Enter />
-      </HStack>
-    </VStack>
-  )
-}
-
-const Backspace = () => {
-  const { colors } = useTheme()
-  return (
-    <Center
-      bg={colors.brand.backspaceBg}
-      color={colors.brand.backspaceText}
-      width={10}
-      height={10}
-      rounded={4}
-    >
-      <BsBackspace />
-    </Center>
-  )
-}
-
-const Enter = () => {
-  const { colors } = useTheme()
-
-  return (
-    <Center
-      cursor={'default'}
-      bg={colors.brand.enterBg}
-      color={colors.brand.enterText}
-      width={20}
-      height={10}
-      rounded={4}
-    >
-      {'ENTER'}
-    </Center>
+        <HStack spacing={1}>
+          <Backspace />
+          <Enter />
+        </HStack>
+      </VStack>
+    </Flex>
   )
 }
 

@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Box, VStack } from '@chakra-ui/react'
 import WordAttempt from './WordAttempt'
+import { GameContext } from '../lib/GameContext'
+import { EventType } from '../lib/EventBus'
 
 type Props = {
   word: string
@@ -10,8 +12,23 @@ type Props = {
 
 const MainBoard: React.FC<Props> = (props) => {
 
+  const gameContext = useContext(GameContext)
   const [current, setCurrent] = useState(0)
-  const [attempts, setAttempts] = useState<string[]>([])
+
+  useEffect(() => {
+    if (gameContext) {
+      const id = gameContext.eventBus.subscribe(EventType.ATTEMPT, (attempt: string) => {
+        if (current < props.numAttempts - 1)
+          setCurrent(current + 1)
+        else
+          gameContext.eventBus.publish(EventType.GAME_OVER)
+      })
+
+      return () => {
+        gameContext.eventBus.unsubscribe(EventType.ATTEMPT, id)
+      }
+    }
+  })
 
   const renderAttemps = () => {
     return (
@@ -21,7 +38,6 @@ const MainBoard: React.FC<Props> = (props) => {
             <WordAttempt
               key={i}
               word={props.word}
-              attempt={attempts[i] || ''}
               isCurrent={i === current}
             />
           ))

@@ -1,3 +1,4 @@
+
 import { extendTheme, ThemeOverride } from "@chakra-ui/react"
 
 const theme = {
@@ -20,14 +21,14 @@ const theme = {
       enterBg: 'green.500',
       enterText: 'gray.300',
     }
-	},
-	styles: {
-		global: ({ theme }: ThemeOverride) => ({
-			'html, body': {
-				backgroundColor: theme.colors.brand.background,
-			}
-		})
-	}
+  },
+  styles: {
+    global: ({ theme }: ThemeOverride) => ({
+      'html, body': {
+        backgroundColor: theme.colors.brand.background,
+      }
+    })
+  }
 }
 
 export default extendTheme(theme)

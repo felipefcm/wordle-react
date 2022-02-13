@@ -17,7 +17,7 @@ const LetterCell: React.FC<Props> = (props) => {
     <Center
       width={10}
       height={10}
-      rounded={4}
+      rounded={1}
       fontSize={30}
       bg={bgColor}
       color={textColor}

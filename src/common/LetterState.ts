@@ -1,0 +1,9 @@
+
+enum LetterState {
+	UNKNOWN = 'UNKNOWN',
+	NOT_PRESENT = 'NOT_PRESENT',
+	INCORRECT_POSITION = 'INCORRECT_POSITION',
+	CORRECT = 'CORRECT',
+}
+
+export default LetterState

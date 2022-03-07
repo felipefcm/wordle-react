@@ -1,6 +1,6 @@
 import React from "react"
 
-import { EventBus } from "./EventBus"
+import { EventBus } from "../common/EventBus"
 
 export type GameContextType = {
 	eventBus: EventBus

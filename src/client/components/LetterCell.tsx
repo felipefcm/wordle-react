@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { Center, useTheme } from '@chakra-ui/react'
-import { determineColors, State } from '../lib/wordle'
+import { determineColors } from '../../common/wordle'
+import { LetterState } from '../../common/MatchState'
 
 type Props = {
   letter?: string
-  state: State
+  state: LetterState
 }
 
 const LetterCell: React.FC<Props> = (props) => {

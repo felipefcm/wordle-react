@@ -2,9 +2,8 @@ import React, { useContext } from 'react'
 
 import { Center, Flex, HStack, useTheme, VStack } from '@chakra-ui/react'
 import { BsBackspace } from 'react-icons/bs'
-import { determineLetterState } from '../lib/wordle'
-import { GameContext } from '../lib/GameContext'
-import { EventType } from '../lib/EventBus'
+import { GameContext } from '@client/GameContext'
+import { EventType } from '@common/EventBus'
 
 type Props = {
   word: string

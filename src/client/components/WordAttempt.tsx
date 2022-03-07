@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { HStack } from '@chakra-ui/react'
 
 import LetterCell from './LetterCell'
-import { determineLetterState, State } from '../lib/wordle'
-import { GameContext } from '../lib/GameContext'
-import { EventType } from '../lib/EventBus'
+import { GameContext } from '@client/GameContext'
+import { EventType } from '@common/EventBus'
+import LetterState from '@common/LetterState'
 
 type Props = {
   isCurrent: boolean
@@ -33,7 +33,7 @@ const WordAttempt: React.FC<Props> = (props) => {
             break
 
           default:
-            if (attempt.length <= props.word.length)
+            if (attempt.length < props.word.length)
               setAttempt(attempt + letter)
         }
       })
@@ -48,7 +48,7 @@ const WordAttempt: React.FC<Props> = (props) => {
     return [...Array(props.word.length)].map((_, i) => {
 
       const letterState = props.isCurrent ?
-        State.NOT_PRESENT : determineLetterState(props.word, attempt, i)
+        LetterState.NOT_PRESENT : LetterState.CORRECT
 
       return (
         <LetterCell

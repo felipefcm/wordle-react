@@ -2,10 +2,10 @@ import React, { FC, useEffect } from 'react'
 
 import { Box, Center, Flex, useTheme } from '@chakra-ui/react'
 
-import MainBoard from '../components/MainBoard'
-import VirtualKeyboard from '../components/VirtualKeyboard'
-import { GameContext, GameContextType } from './GameContext'
-import { EventBus, EventType } from './EventBus'
+import MainBoard from './MainBoard'
+import VirtualKeyboard from './VirtualKeyboard'
+import { GameContext, GameContextType } from '@client/GameContext'
+import { EventBus, EventType } from '../../common/EventBus'
 
 const gameContext: GameContextType = {
   eventBus: new EventBus(),
@@ -35,7 +35,7 @@ const Game: FC = () => {
     <GameContext.Provider value={gameContext}>
       <Flex direction="column">
         <TitleBar />
-        <MainBoard word={randomWord} numAttempts={5} />
+        <MainBoard word={randomWord} numAttempts={6} />
         <VirtualKeyboard word={randomWord} />
       </Flex>
     </GameContext.Provider>

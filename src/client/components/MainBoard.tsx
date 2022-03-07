@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import { Box, VStack } from '@chakra-ui/react'
 import WordAttempt from './WordAttempt'
-import { GameContext } from '../lib/GameContext'
-import { EventType } from '../lib/EventBus'
+import { GameContext } from '@client/GameContext'
+import { EventType } from '@common/EventBus'
 
 type Props = {
   word: string

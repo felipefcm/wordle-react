@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Center, useTheme } from '@chakra-ui/react'
-import { determineColors } from '../../common/wordle'
-import { LetterState } from '../../common/MatchState'
+import { determineColors } from '@client/LetterColors'
+import LetterState from '@common/LetterState'
 
 type Props = {
   letter?: string

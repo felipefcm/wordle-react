@@ -1,3 +1,4 @@
+import LetterState from "./LetterState"
 
 export type AttemptResult = [string, LetterState]
 

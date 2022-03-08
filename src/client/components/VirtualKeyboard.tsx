@@ -6,7 +6,6 @@ import { GameContext } from '@client/GameContext'
 import { EventType } from '@common/EventBus'
 
 type Props = {
-  word: string
 }
 
 const rows = [
@@ -29,21 +28,23 @@ const VirtualKeyboard: React.FC<Props> = (props) => {
     return (
       <HStack spacing={1}>
         {
-          row.split('').map((letter, i) => (
-            <Center
-              as={'button'}
-              key={i}
-              color={"gray.200"}
-              bg={"blue.300"}
-              cursor={'default'}
-              width={10}
-              height={10}
-              rounded={1}
-              onClick={() => onKeyPress(letter.toUpperCase())}
-            >
-              {letter.toUpperCase()}
-            </Center>
-          ))
+          row.split('').map((letter, i) => {
+            return (
+              <Center
+                as={'button'}
+                key={i}
+                color={"gray.200"}
+                bg={"blue.300"}
+                cursor={'default'}
+                width={10}
+                height={10}
+                rounded={1}
+                onClick={() => onKeyPress(letter.toUpperCase())}
+              >
+                {letter.toUpperCase()}
+              </Center>
+            )
+          })
         }
       </HStack>
     )

@@ -14,6 +14,13 @@ class MatchState {
 	setLetterState(letter: string, state: LetterState) {
 		this.letterState[letter.toUpperCase()] = state
 	}
+
+	parseResult(results: [string, string][]) {
+		for (const [letter, state] of results) {
+			const letterState = LetterState[state as keyof typeof LetterState]
+			this.setLetterState(letter, letterState)
+		}
+	}
 }
 
 export default MatchState

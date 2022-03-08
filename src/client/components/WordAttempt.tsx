@@ -9,7 +9,7 @@ import LetterState from '@common/LetterState'
 
 type Props = {
   isCurrent: boolean
-  word: string
+  wordLength: number
 }
 
 const WordAttempt: React.FC<Props> = (props) => {
@@ -28,12 +28,12 @@ const WordAttempt: React.FC<Props> = (props) => {
             break
 
           case 'ENTER':
-            if (attempt.length === props.word.length)
+            if (attempt.length === props.wordLength)
               gameContext.eventBus.publish(EventType.ATTEMPT, attempt)
             break
 
           default:
-            if (attempt.length < props.word.length)
+            if (attempt.length < props.wordLength)
               setAttempt(attempt + letter)
         }
       })
@@ -45,10 +45,12 @@ const WordAttempt: React.FC<Props> = (props) => {
   })
 
   const renderLetters = () => {
-    return [...Array(props.word.length)].map((_, i) => {
+    return [...Array(props.wordLength)].map((_, i) => {
 
-      const letterState = props.isCurrent ?
-        LetterState.NOT_PRESENT : LetterState.CORRECT
+      let letterState = LetterState.NOT_PRESENT
+
+      if (!props.isCurrent && attempt[i] && gameContext)
+        letterState = gameContext.matchState.getLetterState(attempt[i])
 
       return (
         <LetterCell

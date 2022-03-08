@@ -6,37 +6,20 @@ import MainBoard from './MainBoard'
 import VirtualKeyboard from './VirtualKeyboard'
 import { GameContext, GameContextType } from '@client/GameContext'
 import { EventBus, EventType } from '../../common/EventBus'
+import MatchState from '@common/MatchState'
 
 const gameContext: GameContextType = {
   eventBus: new EventBus(),
+  matchState: new MatchState(),
 }
 
-const words = [
-  'apple',
-  // 'robot',
-  // 'house',
-  // 'stoic',
-]
-
 const Game: FC = () => {
-
-  const randomWord = words[Math.trunc(Math.random() * words.length)]
-
-  useEffect(() => {
-    const id = gameContext.eventBus.subscribe(EventType.ATTEMPT, (attempt: string) => {
-    })
-
-    return () => {
-      gameContext.eventBus.unsubscribe(EventType.ATTEMPT, id)
-    }
-  })
-
   return (
     <GameContext.Provider value={gameContext}>
       <Flex direction="column">
         <TitleBar />
-        <MainBoard word={randomWord} numAttempts={6} />
-        <VirtualKeyboard word={randomWord} />
+        <MainBoard numAttempts={6} />
+        <VirtualKeyboard />
       </Flex>
     </GameContext.Provider>
   )

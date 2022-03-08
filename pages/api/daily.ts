@@ -1,9 +1,10 @@
+
 import { NextApiRequest, NextApiResponse } from 'next'
+
 import { AttemptResult } from '@common/MatchState'
-import LetterState from '@common/LetterState'
+import { getAttemptResult } from '@server/wordle'
 
 const dailyWordHandler = async (req: NextApiRequest, res: NextApiResponse<AttemptResult[] | { error: string }>) => {
-
 	const attempt = req.body.attempt as string
 	const testWord = req.body.testWord as string
 

@@ -9,9 +9,9 @@ const theme = {
       titleBarBg: 'blue.800',
       titleBarText: 'gray.200',
 
-      letterUnknownBg: 'gray.800',
+      letterUnknownBg: 'gray.700',
       letterUnknownText: 'gray.300',
-      letterNotInWordBg: 'gray.700',
+      letterNotInWordBg: 'gray.800',
       letterNotInWordText: 'gray.300',
       letterIncorrectPosBg: 'orange.500',
       letterIncorrectPosText: 'gray.300',

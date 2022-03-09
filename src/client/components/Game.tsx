@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import { Box, Center, Flex, useTheme } from '@chakra-ui/react'
+import { Center, Flex, useTheme } from '@chakra-ui/react'
 
 import MainBoard from './MainBoard'
 import VirtualKeyboard from './VirtualKeyboard'
@@ -14,6 +14,17 @@ const gameContext: GameContextType = {
 }
 
 const Game: FC = () => {
+
+  useEffect(() => {
+    const id = gameContext.eventBus.subscribe(EventType.GAME_OVER, async () => {
+
+    })
+
+    return () => {
+      gameContext.eventBus.unsubscribe(EventType.GAME_OVER, id)
+    }
+  })
+
   return (
     <GameContext.Provider value={gameContext}>
       <Flex direction="column">

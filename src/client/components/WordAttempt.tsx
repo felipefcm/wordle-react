@@ -47,7 +47,7 @@ const WordAttempt: React.FC<Props> = (props) => {
   const renderLetters = () => {
     return [...Array(props.wordLength)].map((_, i) => {
 
-      let letterState = LetterState.NOT_PRESENT
+      let letterState = LetterState.UNKNOWN
 
       if (!props.isCurrent && attempt[i] && gameContext)
         letterState = gameContext.matchState.getLetterState(attempt[i])

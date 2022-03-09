@@ -23,9 +23,11 @@ const MainBoard: React.FC<Props> = (props) => {
         const result = await API.submitAttempt(attempt)
         gameContext.matchState.parseResult(result)
 
-        if (current < props.numAttempts - 1)
-          setCurrent(current + 1)
-        else
+
+
+        setCurrent(current + 1)
+
+        if (current >= props.numAttempts - 1)
           gameContext.eventBus.publish(EventType.GAME_OVER)
       })
 

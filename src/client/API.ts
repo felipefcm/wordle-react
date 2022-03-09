@@ -11,8 +11,13 @@ const submitAttempt = async (attempt: string) => {
 	return data
 }
 
+const getSolution = async () => {
+
+}
+
 const API = {
-	submitAttempt
+	submitAttempt,
+	getSolution,
 }
 
 export default API

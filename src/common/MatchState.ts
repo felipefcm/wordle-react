@@ -21,6 +21,12 @@ class MatchState {
 			this.setLetterState(letter, letterState)
 		}
 	}
+
+	isSolution(attempt: string) {
+		return attempt.split('').every(
+			letter => this.getLetterState(letter) === LetterState.CORRECT
+		)
+	}
 }
 
 export default MatchState

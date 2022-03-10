@@ -4,28 +4,19 @@ export type AttemptResult = [string, LetterState]
 
 class MatchState {
 
-	private letterState: Record<string, LetterState> = {}
+	private attemptsState: Record<number, AttemptResult[]> = {}
 
-	getLetterState(letter: string) {
-		const state = this.letterState[letter.toUpperCase()]
-		return state ? state : LetterState.UNKNOWN
+	getLetterState(attemptIndex: number, letterIndex: number) {
+		const attemptState = this.attemptsState[attemptIndex]
+		if (!attemptState) return LetterState.UNKNOWN
+
+		const letterState = attemptState[letterIndex][1]
+
+		return letterState || LetterState.UNKNOWN
 	}
 
-	setLetterState(letter: string, state: LetterState) {
-		this.letterState[letter.toUpperCase()] = state
-	}
-
-	parseResult(results: [string, string][]) {
-		for (const [letter, state] of results) {
-			const letterState = LetterState[state as keyof typeof LetterState]
-			this.setLetterState(letter, letterState)
-		}
-	}
-
-	isSolution(attempt: string) {
-		return attempt.split('').every(
-			letter => this.getLetterState(letter) === LetterState.CORRECT
-		)
+	parseResult(attemptIndex: number, results: AttemptResult[]) {
+		this.attemptsState[attemptIndex] = results
 	}
 }
 

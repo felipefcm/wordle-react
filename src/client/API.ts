@@ -1,4 +1,5 @@
 
+import { AttemptResult } from '@common/MatchState'
 import axios from 'axios'
 
 const client = axios.create()
@@ -8,7 +9,7 @@ const submitAttempt = async (attempt: string) => {
 		attempt
 	})
 
-	return data
+	return data as AttemptResult[]
 }
 
 const getSolution = async () => {

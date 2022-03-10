@@ -10,6 +10,7 @@ import LetterState from '@common/LetterState'
 type Props = {
   isCurrent: boolean
   wordLength: number
+  attemptIndex: number
 }
 
 const WordAttempt: React.FC<Props> = (props) => {
@@ -50,7 +51,7 @@ const WordAttempt: React.FC<Props> = (props) => {
       let letterState = LetterState.UNKNOWN
 
       if (!props.isCurrent && attempt[i] && gameContext)
-        letterState = gameContext.matchState.getLetterState(attempt[i])
+        letterState = gameContext.matchState.getLetterState(props.attemptIndex, i)
 
       return (
         <LetterCell

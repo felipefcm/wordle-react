@@ -21,14 +21,12 @@ const MainBoard: React.FC<Props> = (props) => {
     if (gameContext) {
       const id = gameContext.eventBus.subscribe(EventType.ATTEMPT, async (attempt: string) => {
         const result = await API.submitAttempt(attempt)
-        gameContext.matchState.parseResult(result)
-
-
-
-        setCurrent(current + 1)
+        gameContext.matchState.parseResult(current, result)
 
         if (current >= props.numAttempts - 1)
           gameContext.eventBus.publish(EventType.GAME_OVER)
+
+        setCurrent(current + 1)
       })
 
       return () => {
@@ -46,6 +44,7 @@ const MainBoard: React.FC<Props> = (props) => {
               key={i}
               isCurrent={i === current}
               wordLength={WORD_LENGTH}
+              attemptIndex={i}
             />
           ))
         }

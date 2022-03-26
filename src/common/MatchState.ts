@@ -5,6 +5,7 @@ export type AttemptResult = [string, LetterState]
 class MatchState {
 
 	private attemptsState: Record<number, AttemptResult[]> = {}
+	// private keyboardLettersState =
 
 	getLetterState(attemptIndex: number, letterIndex: number) {
 		const attemptState = this.attemptsState[attemptIndex]

@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { Center, Flex, HStack, useTheme, VStack } from '@chakra-ui/react'
 import { BsBackspace } from 'react-icons/bs'
 import { GameContext } from '@client/GameContext'
 import { EventType } from '@common/EventBus'
-
-type Props = {
-}
+import { AttemptResult } from '@common/MatchState'
 
 const rows = [
   'qwertyuiop',
@@ -14,7 +12,7 @@ const rows = [
   'zxcvbnm',
 ]
 
-const VirtualKeyboard: React.FC<Props> = (props) => {
+const VirtualKeyboard: React.FC = () => {
 
   const gameContext = useContext(GameContext)
 
@@ -23,6 +21,17 @@ const VirtualKeyboard: React.FC<Props> = (props) => {
       gameContext.eventBus.publish(EventType.KEYPRESS, letter)
     }
   }
+
+  useEffect(() => {
+    if (gameContext) {
+      const id = gameContext.eventBus.subscribe(EventType.ATTEMPT_RESULT, (result: AttemptResult[]) => {
+      })
+
+      return () => {
+        gameContext.eventBus.unsubscribe(EventType.ATTEMPT_RESULT, id)
+      }
+    }
+  })
 
   const renderRow = (row: string) => {
     return (

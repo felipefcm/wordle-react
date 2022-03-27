@@ -4,7 +4,7 @@ import { Box, VStack } from '@chakra-ui/react'
 import WordAttempt from './WordAttempt'
 import { GameContext } from '@client/GameContext'
 import { EventType } from '@common/EventBus'
-import API from '@client/API'
+import { AttemptResult } from '@common/MatchState'
 
 const WORD_LENGTH = 5
 
@@ -19,8 +19,7 @@ const MainBoard: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (gameContext) {
-      const id = gameContext.eventBus.subscribe(EventType.ATTEMPT, async (attempt: string) => {
-        const result = await API.submitAttempt(attempt)
+      const id = gameContext.eventBus.subscribe(EventType.ATTEMPT_RESULT, async (result: AttemptResult[]) => {
         gameContext.matchState.parseResult(current, result)
 
         if (current >= props.numAttempts - 1)
@@ -30,7 +29,7 @@ const MainBoard: React.FC<Props> = (props) => {
       })
 
       return () => {
-        gameContext.eventBus.unsubscribe(EventType.ATTEMPT, id)
+        gameContext.eventBus.unsubscribe(EventType.ATTEMPT_RESULT, id)
       }
     }
   })

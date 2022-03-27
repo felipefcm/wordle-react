@@ -1,12 +1,14 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { Center, Flex, useTheme } from '@chakra-ui/react'
 
 import MainBoard from './MainBoard'
 import VirtualKeyboard from './VirtualKeyboard'
 import { GameContext, GameContextType } from '@client/GameContext'
-import { EventBus, EventType } from '../../common/EventBus'
+import { EventBus, EventType } from '@common/EventBus'
 import MatchState from '@common/MatchState'
+import Network from '@client/Network'
+import API from '@client/API'
 
 const gameContext: GameContextType = {
   eventBus: new EventBus(),
@@ -15,13 +17,18 @@ const gameContext: GameContextType = {
 
 const Game: FC = () => {
 
-  useEffect(() => {
-    const id = gameContext.eventBus.subscribe(EventType.GAME_OVER, async () => {
+  const [api] = useState(new API())
+  const [network] = useState(new Network(api, gameContext.eventBus))
 
+  useEffect(() => {
+    network.up()
+
+    const id = gameContext.eventBus.subscribe(EventType.GAME_OVER, async () => {
     })
 
     return () => {
       gameContext.eventBus.unsubscribe(EventType.GAME_OVER, id)
+      network.down()
     }
   })
 

@@ -30,7 +30,7 @@ const WordAttempt: React.FC<Props> = (props) => {
 
           case 'ENTER':
             if (attempt.length === props.wordLength)
-              gameContext.eventBus.publish(EventType.ATTEMPT, attempt)
+              gameContext.eventBus.publish(EventType.ATTEMPT_MADE, attempt)
             break
 
           default:

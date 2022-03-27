@@ -10,7 +10,8 @@ export type Subscription = {
 
 export enum EventType {
   KEYPRESS = 'keypress',
-  ATTEMPT = 'attempt',
+  ATTEMPT_MADE = 'attempt_made',
+  ATTEMPT_RESULT = 'attempt_result',
   GAME_OVER = 'game_over',
 }
 

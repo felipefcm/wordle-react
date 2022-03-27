@@ -2,23 +2,20 @@
 import { AttemptResult } from '@common/MatchState'
 import axios from 'axios'
 
-const client = axios.create()
+class API {
 
-const submitAttempt = async (attempt: string) => {
-	const { data } = await client.post('/api/daily', {
-		attempt
-	})
+	private static client = axios.create()
 
-	return data as AttemptResult[]
-}
+	static async submitAttempt(attempt: string) {
+		const { data } = await this.client.post('/api/daily', {
+			attempt
+		})
 
-const getSolution = async () => {
+		return data as AttemptResult[]
+	}
 
-}
-
-const API = {
-	submitAttempt,
-	getSolution,
+	static async getSolution() {
+	}
 }
 
 export default API

@@ -7,6 +7,11 @@ class MatchState {
 	private attemptsState: Record<number, AttemptResult[]> = {}
 	private keyboardLettersState: Record<string, LetterState> = {}
 
+	reset() {
+		this.attemptsState = {}
+		this.keyboardLettersState = {}
+	}
+
 	getLetterState(attemptIndex: number, letterIndex: number) {
 		const attemptState = this.attemptsState[attemptIndex]
 		if (!attemptState) return LetterState.UNKNOWN
@@ -23,7 +28,6 @@ class MatchState {
 	parseResult(attemptIndex: number, results: AttemptResult[]) {
 		this.attemptsState[attemptIndex] = results
 		this.updateKeyboardLetterState()
-		console.log(`NEW KB STATE`, this.keyboardLettersState)
 	}
 
 	private updateKeyboardLetterState() {

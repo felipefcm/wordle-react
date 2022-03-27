@@ -1,5 +1,5 @@
 
-name: Lint
+name: Lints
 on: [push]
 
 jobs:

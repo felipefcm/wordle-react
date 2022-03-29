@@ -1,6 +1,6 @@
 
-import { getAttemptResult } from '../src/server/wordle'
-import LetterState from '../src/common/LetterState'
+import { getAttemptResult } from '@server/wordle'
+import LetterState from '@common/LetterState'
 
 describe('Attempt evaluation', () => {
 	it('should return all letters as CORRECT', async () => {

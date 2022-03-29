@@ -1,6 +1,6 @@
 
 import MatchState from '@common/MatchState'
-import LetterState from '../src/common/LetterState'
+import LetterState from '@common/LetterState'
 
 const matchState = new MatchState()
 

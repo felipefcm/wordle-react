@@ -10,8 +10,10 @@ import MatchState from '@common/MatchState'
 import Network from '@client/Network'
 import API from '@client/API'
 
+const isDev = process.env.NODE_ENV === "development"
+
 const gameContext: GameContextType = {
-  eventBus: new EventBus(),
+  eventBus: new EventBus(isDev),
   matchState: new MatchState(),
 }
 

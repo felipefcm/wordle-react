@@ -26,6 +26,9 @@ class MatchState {
 	}
 
 	parseResult(attemptIndex: number, results: AttemptResult[]) {
+		if (this.attemptsState[attemptIndex])
+			throw new Error('Attempt result was already present for this attempt index')
+
 		this.attemptsState[attemptIndex] = results
 		this.updateKeyboardLetterState()
 	}

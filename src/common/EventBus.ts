@@ -1,6 +1,4 @@
 
-const debug = true
-
 export type EventCallback = (...args: any[]) => void | Promise<void>
 
 export type Subscription = {
@@ -17,7 +15,12 @@ export enum EventType {
 
 export class EventBus {
 
+  private debug: boolean
   private subscribers: { [event: string]: Subscription[] } = {}
+
+  constructor(debug = false) {
+    this.debug = debug
+  }
 
   public subscribe(event: EventType, callback: EventCallback) {
     this.subscribers[event] ||= []
@@ -37,7 +40,7 @@ export class EventBus {
   }
 
   public publish(event: EventType, ...args: any[]) {
-    if (debug) console.log(`event-bus: publish '${event}'`, args)
+    if (this.debug) console.log(`event-bus: publish '${event}'`, args)
 
     if (!this.subscribers[event]) return
     this.subscribers[event].forEach(sub => sub.callback(...args))

@@ -1,5 +1,4 @@
 import { EventBus, EventType } from "@common/EventBus"
-import MatchState from "@common/MatchState"
 import API from "./API"
 
 class Network {
@@ -18,7 +17,7 @@ class Network {
 		const attemptMadeId = this.eventBus.subscribe(
 			EventType.ATTEMPT_MADE,
 			async (attempt: string) => {
-				const result = await API.submitAttempt(attempt)
+				const result = await this.api.submitAttempt(attempt)
 				this.eventBus.publish(EventType.ATTEMPT_RESULT, result)
 			}
 		)

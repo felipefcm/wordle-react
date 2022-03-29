@@ -4,9 +4,9 @@ import axios from 'axios'
 
 class API {
 
-	private static client = axios.create()
+	private client = axios.create()
 
-	static async submitAttempt(attempt: string) {
+	async submitAttempt(attempt: string) {
 		const { data } = await this.client.post('/api/daily', {
 			attempt
 		})
@@ -14,7 +14,7 @@ class API {
 		return data as AttemptResult[]
 	}
 
-	static async getSolution() {
+	async getSolution() {
 	}
 }
 

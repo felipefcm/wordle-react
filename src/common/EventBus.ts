@@ -39,7 +39,7 @@ export class EventBus {
     this.subscribers[event] = this.subscribers[event].filter(sub => sub.id !== subId)
   }
 
-  public publish(event: EventType, ...args: any[]) {
+  public publish(event: EventType, ...args: unknown[]) {
     if (this.debug) console.log(`event-bus: publish '${event}'`, args)
 
     if (!this.subscribers[event]) return

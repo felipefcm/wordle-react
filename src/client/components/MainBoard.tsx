@@ -5,6 +5,7 @@ import WordAttempt from './WordAttempt'
 import { GameContext } from '@client/GameContext'
 import { EventType } from '@common/EventBus'
 import { AttemptResult } from '@common/MatchState'
+import LetterState from '@common/LetterState'
 
 const WORD_LENGTH = 5
 
@@ -22,8 +23,11 @@ const MainBoard: React.FC<Props> = (props) => {
       const id = gameContext.eventBus.subscribe(EventType.ATTEMPT_RESULT, async (result: AttemptResult[]) => {
         gameContext.matchState.parseResult(current, result)
 
-        if (current >= props.numAttempts - 1)
-          gameContext.eventBus.publish(EventType.GAME_OVER)
+        const lastAttempt = current >= props.numAttempts - 1
+        const foundWord = result.every(([, state]) => state === LetterState.CORRECT)
+
+        if (lastAttempt || foundWord)
+          gameContext.eventBus.publish(EventType.GAME_OVER, foundWord)
 
         setCurrent(current + 1)
       })

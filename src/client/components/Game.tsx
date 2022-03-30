@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 
-import { Center, Flex, useTheme } from '@chakra-ui/react'
+import { Center, Flex, Text, useTheme } from '@chakra-ui/react'
 
 import MainBoard from './MainBoard'
 import VirtualKeyboard from './VirtualKeyboard'
@@ -21,11 +21,13 @@ const Game: FC = () => {
 
   const [api] = useState(new API())
   const [network] = useState(new Network(api, gameContext.eventBus))
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     network.up()
 
-    const id = gameContext.eventBus.subscribe(EventType.GAME_OVER, async () => {
+    const id = gameContext.eventBus.subscribe(EventType.GAME_OVER, async (won: boolean) => {
+      setMessage(won ? 'You found the word, congrats!' : 'Loooooser! Better luck (or brains) next time.')
     })
 
     return () => {
@@ -39,6 +41,9 @@ const Game: FC = () => {
       <Flex direction="column">
         <TitleBar />
         <MainBoard numAttempts={6} />
+        <Center>
+          <Text color="gray.100">{message}</Text>
+        </Center>
         <VirtualKeyboard />
       </Flex>
     </GameContext.Provider>

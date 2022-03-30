@@ -1,6 +1,6 @@
 
-import LetterState from "@common/LetterState"
-import { AttemptResult } from "@common/MatchState"
+import LetterState from '@common/LetterState'
+import { AttemptResult } from '@common/MatchState'
 
 export const getAttemptResult = (word: string, attempt: string) => {
 	if (word.length !== attempt.length) throw new Error('Invalid attempt')

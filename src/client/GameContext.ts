@@ -1,7 +1,7 @@
-import MatchState from "@common/MatchState"
-import React from "react"
+import MatchState from '@common/MatchState'
+import React from 'react'
 
-import { EventBus } from "../common/EventBus"
+import { EventBus } from '../common/EventBus'
 
 export type GameContextType = {
 	eventBus: EventBus

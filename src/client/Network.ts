@@ -1,5 +1,5 @@
-import { EventBus, EventType } from "@common/EventBus"
-import API from "./API"
+import { EventBus, EventType } from '@common/EventBus'
+import API from './API'
 
 class Network {
 

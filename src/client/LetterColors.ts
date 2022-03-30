@@ -1,4 +1,4 @@
-import LetterState from "@common/LetterState"
+import LetterState from '@common/LetterState'
 
 export const determineColors = (state: LetterState, colors: any) => {
 	switch (state) {

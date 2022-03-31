@@ -1,5 +1,5 @@
 
-name: Lints and Tests
+name: Lints and Tests [Game]
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - '.github/workflows/lint-and-test.yml'
 
 jobs:
-  setup:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -21,22 +21,15 @@ jobs:
 
       - name: install dependencies
         run: yarn --frozen-lockfile
-  
-  lints:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
+
       - name: lints
         working-directory: 'projects/game'
         run: yarn eslint .
-
-      - name: next lints
-        working-directory: 'projects/game'
-        run: yarn lint
       
-  tests:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
+      - name: lints (next)
+        working-directory: 'projects/game'
+        run: yarn next lint
+
       - name: run tests
+        working-directory: 'projects/game'
         run: yarn test --verbose

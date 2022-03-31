@@ -1,9 +1,16 @@
 
-name: Run tests
-on: [push]
+name: Deploy Infra
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'projects/infra/**'
+      - '.github/workflows/deploy-infra.yml'
 
 jobs:
-  run-tests:
+  deploy-infra:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -16,6 +23,3 @@ jobs:
 
       - name: install dependencies
         run: yarn --frozen-lockfile
-
-      - name: run tests
-        run: yarn test --verbose

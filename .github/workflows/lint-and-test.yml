@@ -1,0 +1,42 @@
+
+name: Lints and Tests
+
+on:
+  push:
+    paths:
+      - 'projects/game/**'
+      - '.github/workflows/lint-and-test.yml'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: install dependencies
+        run: yarn --frozen-lockfile
+  
+  lints:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: lints
+        working-directory: 'projects/game'
+        run: yarn eslint .
+
+      - name: next lints
+        working-directory: 'projects/game'
+        run: yarn lint
+      
+  tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: run tests
+        run: yarn test --verbose

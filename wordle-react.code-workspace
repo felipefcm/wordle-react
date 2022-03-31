@@ -5,28 +5,12 @@
 			"path": "."
 		},
 		{
-			"name": "Client",
-			"path": "projects/game/src/client"
-		},
-		{
-			"name": "Server",
-			"path": "projects/game/src/server"
-		},
-		{
-			"name": "Common",
-			"path": "projects/game/src/common"
-		},
-		{
-			"name": "Pages",
-			"path": "projects/game/pages"
+			"name": "Game",
+			"path": "projects/game"
 		},
 		{
 			"name": "Infra",
 			"path": "projects/infra"
-		},
-		{
-			"name": "Tests",
-			"path": "projects/game/tests"
 		},
 	],
 	"settings": {

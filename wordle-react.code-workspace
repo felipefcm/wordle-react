@@ -6,24 +6,30 @@
 		},
 		{
 			"name": "Client",
-			"path": "src/client"
+			"path": "projects/game/src/client"
 		},
 		{
 			"name": "Server",
-			"path": "src/server"
+			"path": "projects/game/src/server"
 		},
 		{
 			"name": "Common",
-			"path": "src/common"
+			"path": "projects/game/src/common"
 		},
 		{
 			"name": "Pages",
-			"path": "pages"
+			"path": "projects/game/pages"
+		},
+		{
+			"name": "Infra",
+			"path": "projects/infra"
 		},
 		{
 			"name": "Tests",
-			"path": "tests"
+			"path": "projects/game/tests"
 		},
 	],
-	"settings": {}
+	"settings": {
+		// "eslint.workingDirectories": [{ "mode": "auto" }]
+	}
 }

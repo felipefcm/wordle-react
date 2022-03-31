@@ -1,0 +1,5 @@
+{
+  "name": "wordle",
+  "private": true,
+  "workspaces": ["projects/game", "projects/infra"]
+}

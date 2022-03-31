@@ -1,5 +1,0 @@
-{
-  "name": "wordle",
-  "private": true,
-  "workspaces": ["wordle-react", "wordle-infra"]
-}

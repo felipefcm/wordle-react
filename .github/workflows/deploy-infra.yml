@@ -1,0 +1,43 @@
+
+name: Deploy Infra
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'projects/infra/**'
+      - '.github/workflows/deploy-infra.yml'
+
+jobs:
+  deploy-infra:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: lints
+        working-directory: 'projects/infra'
+        run: yarn eslint .
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::645802428582:role/GitHub-OIDC
+          aws-region: 'us-east-1'
+
+      - name: deploy
+        working-directory: 'projects/infra'
+        run: yarn deploy

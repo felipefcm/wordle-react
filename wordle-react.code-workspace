@@ -5,25 +5,15 @@
 			"path": "."
 		},
 		{
-			"name": "Client",
-			"path": "src/client"
+			"name": "Game",
+			"path": "projects/game"
 		},
 		{
-			"name": "Server",
-			"path": "src/server"
-		},
-		{
-			"name": "Common",
-			"path": "src/common"
-		},
-		{
-			"name": "Pages",
-			"path": "pages"
-		},
-		{
-			"name": "Tests",
-			"path": "tests"
+			"name": "Infra",
+			"path": "projects/infra"
 		},
 	],
-	"settings": {}
+	"settings": {
+		// "eslint.workingDirectories": [{ "mode": "auto" }]
+	}
 }

@@ -40,4 +40,4 @@ jobs:
 
       - name: deploy
         working-directory: 'projects/infra'
-        run: yarn deploy
+        run: yarn deploy --stage release

@@ -15,9 +15,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '14'
+          cache: 'yarn'
+          cache-dependency-path: 'projects/game/yarn.lock'
 
       - name: install dependencies
         run: yarn --frozen-lockfile

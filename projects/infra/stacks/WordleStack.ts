@@ -7,10 +7,13 @@ export default class WordleStack extends sst.Stack {
     super(scope, id, props)
 
     new dynamodb.Table(this, 'words', {
+      tableName: 'words',
+      readCapacity: 1,
+      writeCapacity: 1,
       partitionKey: {
         name: 'words',
         type: dynamodb.AttributeType.STRING
-      }
+      },
     })
   }
 }

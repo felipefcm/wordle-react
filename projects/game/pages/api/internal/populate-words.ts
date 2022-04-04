@@ -10,10 +10,16 @@ const client = new DynamoDB({})
 const docClient = DynamoDBDocumentClient.from(client)
 
 type Data = {
-  msg: string
+  error?: string
+  msg?: string
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+  if (process.env.NODE_ENV !== 'development') {
+    res.status(400).send({ error: 'Invalid request' })
+    return
+  }
 
   const wordsBuffer = await fs.readFile('./words/words_5.txt', 'utf-8')
   const wordsSet = new Set(wordsBuffer.split('\n'))
@@ -38,10 +44,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       // eslint-disable-next-line no-empty
       catch (err) {
       }
-    }, { concurrency: 5 })
+    }, { concurrency: 15 })
 
     console.log(`Round finished, waiting to restart (${wordsSet.size} words to go)`)
-    await new Promise((res) => setTimeout(() => res(0), 5000))
+    await new Promise((res) => setTimeout(() => res(0), 3000))
   }
 
   res.status(200).json({ msg: 'OK' })

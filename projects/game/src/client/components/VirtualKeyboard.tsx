@@ -55,7 +55,7 @@ const VirtualKeyboard: React.FC = () => {
                 as={'button'}
                 key={i}
                 color={'gray.200'}
-                bg={color}
+                bg={color[0]}
                 cursor={'default'}
                 width={10}
                 height={10}

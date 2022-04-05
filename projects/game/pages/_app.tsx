@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import { ChakraProvider } from '@chakra-ui/react'
 
-import theme from '../src/client/theme'
+import theme from '@client/theme'
 
 function WordleGameApp({ Component, pageProps }: AppProps) {
   return (

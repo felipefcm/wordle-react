@@ -4,7 +4,6 @@ import { Center, Flex, HStack, useTheme, VStack } from '@chakra-ui/react'
 import { BsBackspace } from 'react-icons/bs'
 import { GameContext } from '@client/GameContext'
 import { EventType } from '@common/EventBus'
-import { AttemptResult } from '@common/MatchState'
 import { determineColors } from '@client/LetterColors'
 import LetterState from '@common/LetterState'
 

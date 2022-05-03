@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import { HStack } from '@chakra-ui/react'
 
@@ -18,9 +18,13 @@ const WordAttempt: React.FC<Props> = (props) => {
   const gameContext = useContext(GameContext)
   const [attempt, setAttempt] = useState('')
 
+  const processKeypress = useRef(true)
+
   useEffect(() => {
     if (gameContext) {
-      const id = gameContext.eventBus.subscribe(EventType.KEYPRESS, (letter: string) => {
+      const keypressId = gameContext.eventBus.subscribe(EventType.KEYPRESS, (letter: string) => {
+
+        if (!processKeypress.current) return
         if (!props.isCurrent) return
 
         switch (letter) {
@@ -39,8 +43,13 @@ const WordAttempt: React.FC<Props> = (props) => {
         }
       })
 
+      const gameOverId = gameContext.eventBus.subscribe(EventType.GAME_OVER, () => {
+        processKeypress.current = false
+      })
+
       return () => {
-        gameContext.eventBus.unsubscribe(EventType.KEYPRESS, id)
+        gameContext.eventBus.unsubscribe(EventType.KEYPRESS, keypressId)
+        gameContext.eventBus.unsubscribe(EventType.GAME_OVER, gameOverId)
       }
     }
   })

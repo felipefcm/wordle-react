@@ -1,5 +1,5 @@
 
-import { AttemptResult } from '@common/MatchState'
+import { APIResponse } from '@common/APITypes'
 import axios from 'axios'
 
 class API {
@@ -7,11 +7,11 @@ class API {
 	private client = axios.create()
 
 	async submitAttempt(attempt: string) {
-		const { data } = await this.client.post('/api/daily', {
+		const { data: response } = await this.client.post<APIResponse>('/api/daily', {
 			attempt
 		})
 
-		return data as AttemptResult[]
+		return response
 	}
 
 	async getSolution() {

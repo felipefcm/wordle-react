@@ -1,3 +1,4 @@
+
 import API from "@client/API"
 import Network from "@client/Network"
 import { EventBus, EventType } from "@common/EventBus"
@@ -16,11 +17,12 @@ describe('Network', () => {
 		jest.clearAllMocks()
 		eventBus = new EventBus()
 
-		network = new Network(api, eventBus)
+		network = new Network(api, eventBus, () => { })
 		network.up()
 	})
 
 	test('should submit attempt when ATTEMP_MADE event occurs', async () => {
+		jest.spyOn(api, 'submitAttempt').mockResolvedValueOnce({ data: [] })
 		eventBus.publish(EventType.ATTEMPT_MADE, 'BINGO')
 		expect(api.submitAttempt).toHaveBeenCalledTimes(1)
 	})
@@ -34,7 +36,7 @@ describe('Network', () => {
 			['G', LetterState.INCORRECT_POSITION],
 		]
 
-		jest.spyOn(api, 'submitAttempt').mockResolvedValueOnce(result)
+		jest.spyOn(api, 'submitAttempt').mockResolvedValueOnce({ data: result })
 
 		const callback = jest.fn((res: AttemptResult[]) => {
 			expect(res).toStrictEqual(result)

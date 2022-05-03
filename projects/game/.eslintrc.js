@@ -17,7 +17,7 @@ module.exports = {
 
   rules: {
     "@typescript-eslint/no-empty-function": "off",
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", { allowTemplateLiterals: true }],
     "semi": ["error", "never"],
   }
 }

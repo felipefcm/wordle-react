@@ -1,3 +1,4 @@
+
 import React, { FC, useEffect, useState } from 'react'
 
 import { Center, Flex, Text, useTheme } from '@chakra-ui/react'
@@ -9,6 +10,8 @@ import { EventBus, EventType } from '@common/EventBus'
 import MatchState from '@common/MatchState'
 import Network from '@client/Network'
 import API from '@client/API'
+import LoadingSpinner from './LoadingSpinner'
+import { useAPIState } from '@client/APIStateHook'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -20,7 +23,9 @@ const gameContext: GameContextType = {
 const Game: FC = () => {
 
   const [api] = useState(new API())
-  const [network] = useState(new Network(api, gameContext.eventBus))
+  const [apiState, apiStateDispatch] = useAPIState()
+
+  const [network] = useState(new Network(api, gameContext.eventBus, apiStateDispatch))
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -34,7 +39,17 @@ const Game: FC = () => {
       gameContext.eventBus.unsubscribe(EventType.GAME_OVER, id)
       network.down()
     }
-  })
+  }, [network])
+
+  useEffect(() => {
+    if (apiState.status === 'loading') setMessage('')
+
+    if (apiState.status === 'error' && apiState.error) {
+      const error = apiState.error
+      if (error.code === 'InvalidWord')
+        setMessage('Word not in dictionary')
+    }
+  }, [apiState])
 
   return (
     <GameContext.Provider value={gameContext}>
@@ -42,6 +57,7 @@ const Game: FC = () => {
         <TitleBar />
         <MainBoard numAttempts={6} />
         <Center>
+          {apiState.status === 'loading' && <LoadingSpinner />}
           <Text color="gray.100">{message}</Text>
         </Center>
         <VirtualKeyboard />

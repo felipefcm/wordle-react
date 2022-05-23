@@ -1,11 +1,10 @@
 
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { getAttemptResult } from '@server/wordle'
-import { wordIsValid } from '@server/db'
+import { getAttemptResult, wordIsValid } from '@server/wordle'
 import { APIResponse } from '@common/APITypes'
 
-const dailyWordHandler = async (req: NextApiRequest, res: NextApiResponse<APIResponse>) => {
+const dailyWordAttemptHandler = async (req: NextApiRequest, res: NextApiResponse<APIResponse>) => {
 	const attempt = req.body.attempt as string
 
 	const isValid = await wordIsValid(attempt)
@@ -26,4 +25,4 @@ const dailyWordHandler = async (req: NextApiRequest, res: NextApiResponse<APIRes
 	res.json({ data: attemptResult })
 }
 
-export default dailyWordHandler
+export default dailyWordAttemptHandler

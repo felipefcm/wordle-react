@@ -1,6 +1,8 @@
 
 import LetterState from '@common/LetterState'
 import { AttemptResult } from '@common/MatchState'
+import { getItem } from '@server/db'
+import { removeChatAt } from '@common/util'
 
 export const getAttemptResult = (word: string, attempt: string) => {
 	if (word.length !== attempt.length) throw new Error('Invalid attempt')
@@ -40,6 +42,7 @@ export const getAttemptResult = (word: string, attempt: string) => {
 	return attemptResult
 }
 
-const removeChatAt = (str: string, index: number) => {
-	return str.slice(0, index) + str.slice(index + 1)
+export const wordIsValid = async (word: string) => {
+	const result = await getItem('words', { word: word.toLowerCase() })
+	return result !== undefined
 }

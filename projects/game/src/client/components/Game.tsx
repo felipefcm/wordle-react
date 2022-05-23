@@ -71,7 +71,7 @@ const TitleBar = () => {
 
   return (
     <Center h="10" bg={colors.brand.titleBarBg} color={colors.brand.titleBarText}>
-      Wordle Game
+      Wordle
     </Center>
   )
 }

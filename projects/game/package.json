@@ -1,5 +1,5 @@
 {
-  "name": "wordle-react",
+  "name": "wordle",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.58.0",

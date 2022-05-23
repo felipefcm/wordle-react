@@ -15,5 +15,15 @@ export default class WordleStack extends sst.Stack {
         type: dynamodb.AttributeType.STRING
       },
     })
+
+    new dynamodb.Table(this, 'daily', {
+      tableName: 'daily',
+      readCapacity: 1,
+      writeCapacity: 1,
+      partitionKey: {
+        name: 'day',
+        type: dynamodb.AttributeType.NUMBER
+      }
+    })
   }
 }

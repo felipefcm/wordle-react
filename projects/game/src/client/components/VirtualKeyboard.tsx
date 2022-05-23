@@ -56,7 +56,7 @@ const VirtualKeyboard: React.FC = () => {
                 color={'gray.200'}
                 bg={color[0]}
                 cursor={'default'}
-                width={10}
+                width={8}
                 height={10}
                 rounded={1}
                 onClick={() => onKeyPress(letter.toUpperCase())}

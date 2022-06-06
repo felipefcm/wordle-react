@@ -1,6 +1,6 @@
 
 import { DynamoDB } from '@aws-sdk/client-dynamodb'
-import { DynamoDBDocumentClient, GetCommand, ScanCommand } from '@aws-sdk/lib-dynamodb'
+import { DynamoDBDocumentClient, GetCommand, PutCommand, ScanCommand } from '@aws-sdk/lib-dynamodb'
 import remoteCredentials from './aws-credentials'
 
 const docClient = DynamoDBDocumentClient.from(new DynamoDB({ credentials: remoteCredentials }))
@@ -43,4 +43,13 @@ export const scanTable = async <T>(table: string, params: ScanTableParams) => {
 		items: random.Items as T[],
 		lastEvaluatedKey: random.LastEvaluatedKey,
 	} as ScanTableResult<T>
+}
+
+export const putItem = async (table: string, item: unknown) => {
+	await docClient.send(
+		new PutCommand({
+			TableName: table,
+			Item: item as { [key: string]: unknown }
+		})
+	)
 }
